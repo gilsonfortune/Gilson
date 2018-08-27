@@ -1,0 +1,55 @@
+Public Class Form1
+    ' Private Sub index(ByVal arr() As String, myname As String)
+    '    If Array.IndexOf(arr(), myname) = -1 Then
+    '       MsgBox("item does not exist")
+    ''  Else
+    '    MsgBox("Element", MsgBoxStyle.Information)
+    ' End If
+
+    '
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Try
+            Dim mysize As Integer = CInt(InputBox("enter the size of array", "Input"))
+
+            Dim arry(mysize) As String
+            For i = 0 To mysize
+                arry(i) = InputBox("enter a student name", "student")
+
+            Next i
+            For Each i In arry
+                ListBox1.Items.Add(i)
+
+            Next
+            Array.Sort(arry)
+            ListBox1.Items.Add("      ")
+            ListBox1.Items.Add("sorted elements")
+            For Each i In arry
+
+                ListBox1.Items.Add(i)
+            Next
+            Dim myname As String = InputBox("enter the item to whose index you want to find")
+            If Array.IndexOf(arry, myname) = -1 Then
+                MsgBox("item does not exist")
+            Else
+                MsgBox("index is" + Array.IndexOf(arry, myname), MsgBoxStyle.Information)
+            End If
+            'lambda
+            ' Dim sitem As String = InputBox("enter the item to be seached")
+            Dim myvalue As String = Array.Find(arry, Function(x) x.Contains("po"))
+            If myvalue = Nothing Then
+                MsgBox("no name contains po")
+            Else
+                MsgBox("name with  at beginning is" + myvalue)
+            End If
+
+
+        Catch ex As Exception
+            MsgBox(" An error has occured ", MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
+    End Sub
+End Class
